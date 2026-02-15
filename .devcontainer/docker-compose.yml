@@ -1,0 +1,25 @@
+services:
+    app:
+        build:
+            context: ..
+            dockerfile: docker/app/Dockerfile
+        tmpfs:
+            - /var/www/html/bootstrap/cache:uid=33,gid=33,mode=0775
+            - /var/www/html/storage:uid=33,gid=33,mode=0775
+        volumes:
+            - ../bootstrap/cache/.gitignore:/var/www/html/bootstrap/cache/.gitignore:ro
+            - ../storage/framework:/var/www/html/storage/framework:rw
+            - ./app.profile:/root/.profile:ro
+            - app-vendor:/var/www/html/vendor
+            - ../:/var/www/html/:rw
+        network_mode: "service:web"
+
+    web:
+        build:
+            context: ..
+            dockerfile: docker/nginx/Dockerfile
+        ports:
+            - 8080:80
+
+volumes:
+    app-vendor:

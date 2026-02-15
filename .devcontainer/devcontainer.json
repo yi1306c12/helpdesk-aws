@@ -1,0 +1,20 @@
+{
+    "name": "helpdesk-aws",
+    "dockerComposeFile": ["./docker-compose.yml"],
+    "service": "app",
+    "workspaceFolder": "/var/www/html/",
+    "remoteUser": "root",
+    "postCreateCommand": "/bin/sh ./.devcontainer/postCreateCommand.sh",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "intelephense.environment.phpVersion": "8.4"
+            },
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "SanderRonde.phpstan-vscode"
+            ]
+        }
+    }
+}
