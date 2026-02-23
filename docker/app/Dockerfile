@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 # Stage 1: Build environment and Composer dependencies
 FROM php:8.4-cli AS builder
 WORKDIR /var/www/html
