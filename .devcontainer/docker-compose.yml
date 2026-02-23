@@ -3,15 +3,14 @@ services:
         build:
             context: ..
             dockerfile: docker/app/Dockerfile
-        tmpfs:
-            - /var/www/html/bootstrap/cache:uid=33,gid=33,mode=0775
-            - /var/www/html/storage:uid=33,gid=33,mode=0775
         volumes:
-            - ../bootstrap/cache/.gitignore:/var/www/html/bootstrap/cache/.gitignore:ro
-            - ../storage/framework:/var/www/html/storage/framework:rw
             - ./app.profile:/root/.profile:ro
-            - app-vendor:/var/www/html/vendor
-            - ../:/var/www/html/:rw
+            - ../.env.example:/var/www/html/.env.example:ro
+            - ../.devcontainer:/var/www/html/.devcontainer
+            - ../.git:/var/www/html/.git
+            - ../.github:/var/www/html/.github
+            - ../docker:/var/www/html/docker
+            - ../documents:/var/www/html/documents
         network_mode: "service:web"
 
     web:
@@ -23,3 +22,4 @@ services:
 
 volumes:
     app-vendor:
+
